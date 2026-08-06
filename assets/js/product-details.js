@@ -47,7 +47,7 @@ const PRODUCT_DETAILS = {
   // Phone numbers used around the site
   phones: {
     // Shown as text in the top announcement bar
-    supportDisplay: 'idris gay',
+    supportDisplay: '0664735713',
     // Used for the tel: link on the mobile "call us" button
     callLink: '0664735713',
   },
