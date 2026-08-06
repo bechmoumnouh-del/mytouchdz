@@ -68,7 +68,7 @@ const PRODUCT_DETAILS = {
     {
       id: 1,
       qty: 1,
-      price: 3500,
+      price: 3490,
       freeDelivery: false,
       title: 'قطعة واحدة',
       active: true, // pre-selected on page load
@@ -76,14 +76,14 @@ const PRODUCT_DETAILS = {
     {
       id: 2,
       qty: 2,
-      price: 6500,
+      price: 6900,
       freeDelivery: false,
       title: 'قطعتان',
     },
     {
       id: 3,
       qty: 3,
-      price: 10000,
+      price: 9900,
       freeDelivery: false,
       title: 'ثلاث قطع',
     },
