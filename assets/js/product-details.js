@@ -77,7 +77,7 @@ const PRODUCT_DETAILS = {
       id: 2,
       qty: 2,
       price: 6900,
-      freeDelivery: true,
+      freeDelivery: false,
       title: 'قطعتان',
     },
     {
