@@ -84,7 +84,7 @@ const PRODUCT_DETAILS = {
       id: 3,
       qty: 3,
       price: 9900,
-      freeDelivery: false,
+      freeDelivery: true,
       title: 'ثلاث قطع',
     },
   ],
