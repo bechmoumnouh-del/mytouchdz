@@ -68,7 +68,7 @@ const PRODUCT_DETAILS = {
     {
       id: 1,
       qty: 1,
-      price: 3490,
+      price: 3700,
       freeDelivery: false,
       title: 'قطعة واحدة',
       active: true, // pre-selected on page load
