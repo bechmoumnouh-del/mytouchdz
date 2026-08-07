@@ -63,6 +63,17 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('mobile-buy-price').textContent = `${basePackage.price}${d.currency}`;
     document.getElementById('mobile-buy-label').textContent = `${basePackage.qty}x ${d.name}`;
 
+    const priceOriginalEl = document.getElementById('product-price-original');
+    const discountBadgeEl = document.getElementById('product-discount-badge');
+    if (basePackage.originalPrice && basePackage.originalPrice > basePackage.price) {
+      const pct = Math.round((1 - basePackage.price / basePackage.originalPrice) * 100);
+      priceOriginalEl.textContent = `${basePackage.originalPrice} ${d.currency}`;
+      discountBadgeEl.textContent = `خصم ${pct}%`;
+    } else {
+      priceOriginalEl.textContent = '';
+      discountBadgeEl.textContent = '';
+    }
+
     // Testimonials
     document.getElementById('testimonials-heading').textContent = d.testimonialsHeading;
     renderTestimonials();
@@ -78,16 +89,26 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── Build the quantity/package buttons from product-details.js ────
   function renderPackages() {
     const container = document.getElementById('packages');
-    container.innerHTML = PRODUCT_DETAILS.packages.map(p => `
+    container.innerHTML = PRODUCT_DETAILS.packages.map(p => {
+      const hasDiscount = p.originalPrice && p.originalPrice > p.price;
+      const pct = hasDiscount ? Math.round((1 - p.price / p.originalPrice) * 100) : 0;
+      return `
       <button type="button" class="package qty-card${p.active ? ' package--active active' : ''}"
               data-price="${p.price}" data-qty="${p.qty}" data-free-delivery="${!!p.freeDelivery}">
         ${p.freeDelivery ? '<span class="package__ribbon">توصيل مجاني</span>' : ''}
         <span class="package__title">${p.title}</span>
-        <span class="package__price"><b>${p.price}</b> ${PRODUCT_DETAILS.currency}</span>
+        <span class="package__price-group">
+          ${hasDiscount ? `<span class="package__price-original">${p.originalPrice} ${PRODUCT_DETAILS.currency}</span>` : ''}
+          <span class="package__price-line">
+            <span class="package__price"><b>${p.price}</b> ${PRODUCT_DETAILS.currency}</span>
+            ${hasDiscount ? `<span class="package__discount">-${pct}%</span>` : ''}
+          </span>
+        </span>
         <span class="qty-num" hidden>${p.qty}</span>
         <svg class="package__check" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
       </button>
-    `).join('');
+    `;
+    }).join('');
   }
 
   applyProductDetails();

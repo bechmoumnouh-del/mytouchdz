@@ -185,4 +185,34 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   attachSelectPulse('.package');
   attachSelectPulse('.delivery-card');
+
+  // ── 6) Discount badges: playful pop-in + gentle idle "breathing" pulse ─
+  (function discountBadgePop() {
+    const badges = document.querySelectorAll('.discount-badge, .package__discount');
+    if (!badges.length) return;
+
+    badges.forEach((badge, i) => {
+      if (!badge.textContent.trim()) return; // nothing to show — skip
+      anime.set(badge, { scale: 0, rotate: -8 });
+      anime({
+        targets: badge,
+        scale: [0, 1.15, 1],
+        rotate: [-8, 0],
+        duration: 650,
+        delay: 500 + i * 90,
+        easing: 'easeOutElastic(1, .6)',
+        complete: () => {
+          clearInlineStyle(badge, ['transform']);
+          // Subtle, youthful "breathing" loop once it has landed
+          anime({
+            targets: badge,
+            scale: [1, 1.06, 1],
+            duration: 1400,
+            easing: 'easeInOutSine',
+            loop: true,
+          });
+        },
+      });
+    });
+  })();
 });
